@@ -1,9 +1,8 @@
-var path = require("path");
+require("dotenv").config();
+const app = require("./server/server");
 
-const paths = {
-  config: path.resolve("server", "config/config.json"),
-  "migrations-path": path.resolve("server", "migrations"),
-  "models-path": path.resolve("server", "models"),
-};
+const port = process.env.PORT || 5000;
 
-console.log(paths["migrations-path"]);
+app.listen(port, () => {
+  console.log(`Listening on port ${port}`);
+});
