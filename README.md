@@ -2,7 +2,7 @@
 
 ## Basic Authentication Micro Service
 
-This application is basic authentication REST API Micro Service.
+This application is a basic authentication REST API Micro Service.
 
 ### Supported OAuth Strategies
 
