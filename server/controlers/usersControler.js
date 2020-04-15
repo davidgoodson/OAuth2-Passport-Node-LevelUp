@@ -9,7 +9,7 @@ signToken = (user) => {
     },
     process.env.JWT_SECRET,
     {
-      expiresIn: "1h",
+      expiresIn: "5m",
     }
   );
 };
@@ -39,5 +39,33 @@ module.exports = {
       }
     });
     console.log(req.body);
+  },
+  login: (req, res) => {
+    console.log("Logging In");
+    User.findOne({ where: { email: req.body.email } }).then((user) => {
+      if (user) {
+        bcrypt.compare(
+          req.body.password,
+          user.dataValues.password,
+          (err, same) => {
+            if (err)
+              return res.status(400).json({ error: "Authentication Failed!" });
+            if (same) {
+              const token = signToken(user);
+              return res.status(200).json({ token: token });
+            } else {
+              return res.status(403).json({ error: "Invalid Password!" });
+            }
+          }
+        );
+      } else {
+        return res
+          .status(400)
+          .json({ error: "Email address does not exist in our system." });
+      }
+    });
+  },
+  get_users: (req, res) => {
+    return res.status(200).json({ message: "You're in" });
   },
 };
