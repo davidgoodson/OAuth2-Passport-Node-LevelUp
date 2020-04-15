@@ -12,6 +12,7 @@ signToken = (user) => {
     }
   );
 };
+
 module.exports = {
   validateSignup: () => {
     return (req, res, next) => {
@@ -27,6 +28,7 @@ const schemas = {
   signUp: {
     firstname: Joi.string().min(3).required(),
     othername: Joi.string().min(3).required(),
+    password: Joi.string().min(5).required(),
     email: Joi.string().min(5).required(),
   },
   webLogin: {
