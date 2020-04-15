@@ -1,18 +1,6 @@
 const Joi = require("joi");
 const JWT = require("jsonwebtoken");
 
-signToken = (user) => {
-  return JWT.sign(
-    {
-      id: user.dataValues.id,
-    },
-    process.env.JWT_SECRET,
-    {
-      expiresIn: "1h",
-    }
-  );
-};
-
 module.exports = {
   validateSignup: () => {
     return (req, res, next) => {
